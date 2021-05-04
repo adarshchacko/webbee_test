@@ -98,11 +98,13 @@ class EventsController extends BaseController
 
     public function getEventsWithWorkshops() {
 
-        // return Event::find(1)->workshops;
+        $events = Event::with('workshops')->get();
 
-        return Event::with('workshops')->get();
+        if($events !== NULL && count($events) !== 0){
+            return $events;
+        }
 
-        throw new \Exception('implement in coding task 1');
+        throw new \Exception('No event exists');
     }
 
 
@@ -181,6 +183,12 @@ class EventsController extends BaseController
      */
 
     public function getFutureEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 2');
+
+        $events = Event::with('workshops')->whereHas('workshops')->get();
+
+        if($events !== NULL && count($events) !== 0){
+            return $events;
+        }
+        throw new \Exception('No future event exists');
     }
 }

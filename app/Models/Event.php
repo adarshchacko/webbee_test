@@ -10,6 +10,6 @@ class Event extends Model
 
 	public function workshops()
     {
-        return $this->hasMany('App\Models\Workshop');
+        return $this->hasMany('App\Models\Workshop')->whereDate('start', '>', \DB::raw('NOW()'));
     }
 }
