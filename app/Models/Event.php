@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
 
-	public function workshops()
+	/*public function workshops()
+    {
+        return $this->hasMany('App\Models\Workshop');
+    }*/
+
+    public function workshops()
     {
         return $this->hasMany('App\Models\Workshop')->whereDate('start', '>', \DB::raw('NOW()'));
     }
